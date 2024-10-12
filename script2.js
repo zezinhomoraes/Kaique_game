@@ -1,21 +1,32 @@
 import { heroi, grama, mapa,wall } from "./script.js";
-console.log(grama.offsetWidth)
-console.log(wall.offsetHeight)
 
 
-
-
-
+    //Transformar em uma classe
    function gerarInimigo(wall){
-        for(let i = 0; i < 20; i++){
+        for(let i = 0; i < 50; i++){
             let inimigo = document.createElement("div")
-            let posX=Math.floor(Math.random()*wall.offsetWidth-80)
-            let posY=Math.floor(Math.random()*wall.offsetHeight-80)
-            if(posX<=-5){
-                posX=-5
+
+            let posX=Math.floor(Math.random()*wall.offsetWidth-80).toString()
+            let lastStringPosX = posX.at(posX.lastIndexOf(posX.slice(-1)))
+            if (lastStringPosX != "0") {
+                console.log(lastStringPosX)
+               posX = posX.replace(lastStringPosX, "0")
+               console.log(posX)
             }
-            if(posY<=-5){
-                posY=-5
+
+            let posY=Math.floor(Math.random()*wall.offsetHeight-80).toString()
+            let lastIndexPosY = posY.lastIndexOf(posY.slice(-1))
+            let lastStringPosY = posY.at(lastIndexPosY)
+            if (lastStringPosY != "0") {
+               posY = parseInt(posY.replace(lastStringPosY, "0"))
+            }
+
+
+            if(posX<=0){
+                posX=0
+            }
+            if(posY<=0){
+                posY=0
             }
 
             inimigo.setAttribute("class","inimigo")
@@ -27,16 +38,23 @@ console.log(wall.offsetHeight)
         }
     }
 
-    function movimentoInimigo(inimigo){
+    function movimentoInimigo(inimigo, wall){
        inimigo.forEach(element => {
 
-
+        
 
             function movY(){
                 let dir = Math.floor(Math.random()*2+1)
                 if(dir == 1){dir=+1}else if(dir == 2){dir=-1}
                 let mov = setInterval(()=>{
-                    element.style.top=parseInt(getComputedStyle(element).top)+dir*(15)+"px"
+                    let posY = parseInt(getComputedStyle(element).top)
+                    if (posY>=3560 || posY<=0) {
+
+                        dir=dir*(-1)
+                    }
+                    element.style.top=parseInt(getComputedStyle(element).top)+dir*(10)+"px"
+                    
+
                 },200)
                 setTimeout(()=>{
                     clearInterval(mov)
@@ -44,18 +62,31 @@ console.log(wall.offsetHeight)
                 },3000)
             }
             function movX(){
+
                 let dir = Math.floor(Math.random()*2+1)
                 if(dir == 1){dir=+1}else if(dir == 2){dir=-1}
+                
                 let movs = setInterval(()=>{
-                    element.style.left=parseInt(getComputedStyle(element).left)+dir*(15)+"px"
+                    
+                    let posX = parseInt(getComputedStyle(element).left)
+                    if (posX>=3560 || posX<=0) {
+                        dir=dir*(-1)
+                    }
+
+                    element.style.left=parseInt(getComputedStyle(element).left)+dir*(10)+"px"
                 },200)
+
                 setTimeout(()=>{
                     clearInterval(movs)
-                    // movimentoInimigo([...document.querySelectorAll(".inimigo")])
                     movY()
                 },3000)
             }
-            movY()
+            let dirA = Math.floor(Math.random()*2+1)
+            if(dirA==1){
+                movY()
+            }else if(dirA==2){
+                movX()
+            }
            
            
         });
@@ -63,5 +94,9 @@ console.log(wall.offsetHeight)
 
     window.addEventListener("load",(evt)=>{
         gerarInimigo(wall)
-        movimentoInimigo([...document.querySelectorAll(".inimigo")])
+        // movimentoInimigo([...document.querySelectorAll(".inimigo")], wall)
+
     })
+
+
+    
