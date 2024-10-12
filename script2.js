@@ -94,7 +94,7 @@ import { heroi, grama, mapa,wall } from "./script.js";
 
     window.addEventListener("load",(evt)=>{
         gerarInimigo(wall)
-        // movimentoInimigo([...document.querySelectorAll(".inimigo")], wall)
+        movimentoInimigo([...document.querySelectorAll(".inimigo")], wall)
 
     })
 
