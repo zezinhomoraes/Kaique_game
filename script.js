@@ -76,34 +76,32 @@ const movimento = {
 
 document.addEventListener("keydown",(evt)=>{
   if(evt.code==="ArrowUp"){
-    movimento.up(heroi,grama)
     if(parseInt(getComputedStyle(heroi).top)<=0){
-      heroi.style.top=0+"px"
-      grama.style.top=-1327+"px"
+      evt.code.preventDefault()
     }
+    movimento.up(heroi,grama)
   }
   if(evt.code=="ArrowLeft"){
-    movimento.left(heroi,grama)
     if(parseInt(getComputedStyle(heroi).left)<=0){
-      heroi.style.left=0+"px"
-      grama.style.left=-1000+"px"
+      evt.code.preventDefault()
     }
+    movimento.left(heroi,grama)
 
   }
   if(evt.code=="ArrowRight"){
-    movimento.right(heroi,grama)
     if(parseInt(getComputedStyle(heroi).left)>=3560){
-      heroi.style.left=3560+"px"
-      grama.style.left=-4560+"px"
+      evt.code.preventDefault()
+      
     }
+    movimento.right(heroi,grama)
 
   }
   if(evt.code=="ArrowDown"){
-    movimento.down(heroi,grama)
     if(parseInt(getComputedStyle(heroi).top)>=3560){
-      heroi.style.top=3560+"px"
-      grama.style.top=-4887+"px"
+      evt.code.preventDefault()
+      
     }
+    movimento.down(heroi,grama)
 
   }
 })

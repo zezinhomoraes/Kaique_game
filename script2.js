@@ -9,9 +9,7 @@ import { heroi, grama, mapa,wall } from "./script.js";
             let posX=Math.floor(Math.random()*wall.offsetWidth-80).toString()
             let lastStringPosX = posX.at(posX.lastIndexOf(posX.slice(-1)))
             if (lastStringPosX != "0") {
-                console.log(lastStringPosX)
                posX = posX.replace(lastStringPosX, "0")
-               console.log(posX)
             }
 
             let posY=Math.floor(Math.random()*wall.offsetHeight-80).toString()
@@ -55,7 +53,7 @@ import { heroi, grama, mapa,wall } from "./script.js";
                     element.style.top=parseInt(getComputedStyle(element).top)+dir*(10)+"px"
                     
 
-                },200)
+                },10)
                 setTimeout(()=>{
                     clearInterval(mov)
                     movX()
@@ -74,7 +72,7 @@ import { heroi, grama, mapa,wall } from "./script.js";
                     }
 
                     element.style.left=parseInt(getComputedStyle(element).left)+dir*(10)+"px"
-                },200)
+                },10)
 
                 setTimeout(()=>{
                     clearInterval(movs)
